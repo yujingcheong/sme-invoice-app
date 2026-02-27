@@ -25,6 +25,9 @@ Route::get('/health', function () {
     }
 })->name('health');
 
+// Portfolio page (public - no auth required)
+Route::view('/portfolio', 'portfolio')->name('portfolio');
+
 Route::view('/', 'welcome')->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
