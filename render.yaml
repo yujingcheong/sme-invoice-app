@@ -3,6 +3,7 @@ services:
     name: sme-invoice-app
     runtime: docker
     plan: free
+    healthCheckPath: /health
     envVars:
       - key: APP_KEY
         generateValue: true
@@ -10,6 +11,10 @@ services:
         value: production
       - key: APP_DEBUG
         value: false
+      - key: APP_URL
+        sync: false
+      - key: LOG_CHANNEL
+        value: stderr
       - key: DB_CONNECTION
         value: pgsql
       - key: DB_HOST
