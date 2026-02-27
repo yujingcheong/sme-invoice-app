@@ -18,30 +18,14 @@ services:
       - key: DB_CONNECTION
         value: pgsql
       - key: DB_HOST
-        fromDatabase:
-          name: sme-invoice-db
-          property: host
+        sync: false
       - key: DB_PORT
-        fromDatabase:
-          name: sme-invoice-db
-          property: port
+        value: "5432"
       - key: DB_DATABASE
-        fromDatabase:
-          name: sme-invoice-db
-          property: database
+        sync: false
       - key: DB_USERNAME
-        fromDatabase:
-          name: sme-invoice-db
-          property: user
+        sync: false
       - key: DB_PASSWORD
-        fromDatabase:
-          name: sme-invoice-db
-          property: password
+        sync: false
       - key: DB_SSLMODE
         value: require
-
-databases:
-  - name: sme-invoice-db
-    plan: free
-    databaseName: sme_invoice_production
-    user: sme_invoice_user
