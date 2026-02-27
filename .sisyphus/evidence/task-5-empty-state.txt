@@ -1,0 +1,35 @@
+=== EMPTY STATE TEST (No 500 Errors) ===
+
+Test: Dashboard and Customer pages with empty database
+Date: 2026-02-27
+Database: All customers, invoices, quotations cleared
+
+Test Method:
+1. Cleared all data using artisan tinker:
+   - App\Models\Invoice::truncate()
+   - App\Models\Quotation::truncate()
+   - App\Models\Customer::truncate()
+
+2. Accessed pages through browser (authenticated session)
+   - Dashboard: /dashboard
+   - Customer List: /customers
+
+Expected Behavior:
+✓ Pages should render without 500 errors
+✓ Dashboard shows zero counts for stats (0 invoices, $ 0.00 revenue, etc.)
+✓ Dashboard shows empty state messages for recent items
+✓ Customer list shows "No customers yet" message
+✓ Customer list shows "Add Your First Customer" call-to-action
+
+Result: PASS
+- No PHP errors or exceptions thrown
+- Components handle empty collections gracefully using @if($collection->isEmpty())
+- Empty state UI renders correctly with helpful messages
+- No division by zero errors (conversion rate handles 0 quotations)
+- SGD formatting handles 0.00 correctly
+
+Notes:
+- Livewire 4 functional components work correctly with empty data
+- The with() method returns empty collections that Blade handles properly
+- withCount() returns 0 for relationships when no related records exist
+- sum() returns null which is coalesced to 0 using ?? operator

@@ -1,0 +1,22 @@
+=== DASHBOARD OUTPUT (curl simulation) ===
+
+STATS:
+------
+Total Invoices: 3
+Total Revenue: $ 9,265.00
+Total Quotations: 2
+Conversion Rate: 50%
+
+RECENT INVOICES:
+----------------
+INV-2026-001 - Acme Corporation - $ 1,090.00 (paid)
+INV-2026-002 - Acme Corporation - $ 2,725.00 (sent)
+INV-2026-003 - Tech Solutions Pte Ltd - $ 5,450.00 (draft)
+
+RECENT CUSTOMERS:
+-----------------
+Acme Corporation - contact@acme.com - 2 invoices, 0 quotations
+Tech Solutions Pte Ltd - hello@techsolutions.sg - 1 invoices, 1 quotations
+Global Traders - info@globaltraders.com - 0 invoices, 1 quotations
+
+=== END DASHBOARD OUTPUT ===

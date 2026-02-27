@@ -27,6 +27,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('customers/{customer}/edit', function (\App\Models\Customer $customer) {
         return view('components.customers.⚡form', ['customer' => $customer]);
     })->name('customers.edit');
+    
+    // Invoice routes
+    Route::get('invoices', function () {
+        return view('components.invoices.⚡index');
+    })->name('invoices.index');
+    
+    Route::get('invoices/create', function () {
+        return view('components.invoices.⚡create');
+    })->name('invoices.create');
 });
 
 require __DIR__.'/settings.php';

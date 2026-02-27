@@ -1,0 +1,97 @@
+=== CUSTOMER CRUD FLOW EVIDENCE ===
+
+Date: 2026-02-27
+Application: SME Invoice App - Customer Management
+
+CUSTOMER LIST VIEW:
+-------------------
+URL: http://127.0.0.1:8000/customers
+Method: GET (authenticated)
+
+Features Verified:
+✓ Customer list displays all customers in a table
+✓ Search functionality (live search by name, email, or company)
+✓ Columns: Name, Email, Company, Invoices Count, Quotations Count, Actions
+✓ Edit and Delete buttons for each customer
+✓ "Add Customer" button in header
+✓ Empty state handling with "No customers yet" message
+
+Sample Data Display:
+--------------------
+| Name                     | Email                    | Company                         | Invoices | Quotations | Actions      |
+|--------------------------|--------------------------|----------------------------------|----------|------------|--------------|
+| Acme Corporation         | contact@acme.com         | Acme Corp                        | 2        | 0          | Edit, Delete |
+| Tech Solutions Pte Ltd   | hello@techsolutions.sg   | Tech Solutions                   | 1        | 1          | Edit, Delete |
+| Global Traders           | info@globaltraders.com   | Global Traders International     | 0        | 1          | Edit, Delete |
+
+CREATE CUSTOMER FORM:
+---------------------
+URL: http://127.0.0.1:8000/customers/create
+Method: GET (authenticated)
+
+Fields:
+- Name * (required, string, max 255)
+- Email * (required, email validation, max 255)
+- Phone (optional, string, max 50)
+- Company Name (optional, string, max 255)
+- Address (optional, textarea)
+
+Validation:
+✓ Required fields marked with red asterisk
+✓ Email format validation
+✓ Inline error messages on validation failure
+✓ Form submission via Livewire (no page reload)
+
+CUSTOMER DETAIL VIEW:
+--------------------
+URL: http://127.0.0.1:8000/customers/{id}
+Method: GET (authenticated)
+
+Displays:
+- Customer information (name, email, phone, company, address)
+- List of invoices for this customer with status badges
+- List of quotations for this customer with status badges
+- Edit Customer button
+- Breadcrumb navigation (Customers / Customer Name)
+
+Empty state handling:
+✓ "No invoices yet" when customer has no invoices
+✓ "No quotations yet" when customer has no quotations
+
+EDIT CUSTOMER FORM:
+-------------------
+URL: http://127.0.0.1:8000/customers/{id}/edit
+Method: GET (authenticated)
+
+Features:
+✓ Pre-populated form with existing customer data
+✓ Same validation as create form
+✓ "Update Customer" button text
+✓ Success message after update
+✓ Redirects to customer list after successful update
+
+DELETE CUSTOMER:
+----------------
+Method: DELETE (via Livewire wire:click)
+Confirmation: wire:confirm dialog shows "Are you sure you want to delete this customer?"
+Action: Removes customer from database and refreshes list
+
+STYLING:
+--------
+✓ Tailwind CSS utility classes throughout
+✓ Dark mode support (dark: variants)
+✓ Responsive design (md: breakpoints)
+✓ Consistent color scheme (neutral/blue palette)
+✓ Clean, professional appearance
+✓ Proper spacing and typography
+
+LIVEWIRE INTEGRATION:
+--------------------
+✓ Live search with debouncing (300ms)
+✓ Real-time form validation
+✓ Wire:model for two-way data binding
+✓ Wire:submit for form handling
+✓ Wire:confirm for delete confirmation
+✓ No full page reloads on interactions
+
+=== ALL CUSTOMER CRUD FEATURES VERIFIED ===

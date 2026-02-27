@@ -1,0 +1,6 @@
+
+[33mIn ProviderRepository.php line 205:[39m
+[37;41m                                                     [39;49m
+[37;41m  Class "Barryvdh\DomPDF\ServiceProvider" not found  [39;49m
+[37;41m                                                     [39;49m
+

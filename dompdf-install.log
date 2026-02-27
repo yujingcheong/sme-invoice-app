@@ -1,0 +1,31 @@
+[32m./composer.json has been updated[39m
+[32mRunning composer update barryvdh/laravel-dompdf[39m
+[32mLoading composer repositories with package information[39m
+[32mUpdating dependencies[39m
+[32mLock file operations: 7 installs, 0 updates, 0 removals[39m
+  - Locking [32mbarryvdh/laravel-dompdf[39m ([33mv3.1.1[39m)
+  - Locking [32mdompdf/dompdf[39m ([33mv3.1.4[39m)
+  - Locking [32mdompdf/php-font-lib[39m ([33m1.0.2[39m)
+  - Locking [32mdompdf/php-svg-lib[39m ([33m1.0.2[39m)
+  - Locking [32mmasterminds/html5[39m ([33m2.10.0[39m)
+  - Locking [32msabberworm/php-css-parser[39m ([33mv9.2.0[39m)
+  - Locking [32mthecodingmachine/safe[39m ([33mv3.4.0[39m)
+[32mWriting lock file[39m
+[32mInstalling dependencies from lock file (including require-dev)[39m
+[32mPackage operations: 7 installs, 0 updates, 0 removals[39m
+  - Downloading [32mmasterminds/html5[39m ([33m2.10.0[39m)
+  - Downloading [32mthecodingmachine/safe[39m ([33mv3.4.0[39m)
+  - Downloading [32msabberworm/php-css-parser[39m ([33mv9.2.0[39m)
+  - Downloading [32mdompdf/php-svg-lib[39m ([33m1.0.2[39m)
+  - Downloading [32mdompdf/php-font-lib[39m ([33m1.0.2[39m)
+  - Downloading [32mdompdf/dompdf[39m ([33mv3.1.4[39m)
+  - Downloading [32mbarryvdh/laravel-dompdf[39m ([33mv3.1.1[39m)
+ 0/7 [>---------------------------]   0%[1G[2K 1/7 [====>-----------------------]  14%[1G[2K 2/7 [========>-------------------]  28%[1G[2K 4/7 [================>-----------]  57%[1G[2K 5/7 [====================>-------]  71%[1G[2K 6/7 [========================>---]  85%[1G[2K 7/7 [============================] 100%[1G[2K  - Installing [32mmasterminds/html5[39m ([33m2.10.0[39m): Extracting archive
+  - Installing [32mthecodingmachine/safe[39m ([33mv3.4.0[39m): Extracting archive
+  - Installing [32msabberworm/php-css-parser[39m ([33mv9.2.0[39m): Extracting archive
+  - Installing [32mdompdf/php-svg-lib[39m ([33m1.0.2[39m): Extracting archive
+  - Installing [32mdompdf/php-font-lib[39m ([33m1.0.2[39m): Extracting archive
+  - Installing [32mdompdf/dompdf[39m ([33mv3.1.4[39m): Extracting archive
+  - Installing [32mbarryvdh/laravel-dompdf[39m ([33mv3.1.1[39m): Extracting archive
+ 0/7 [>---------------------------]   0%[1G[2K 1/7 [====>-----------------------]  14%[1G[2K 3/7 [============>---------------]  42%[1G[2K 5/7 [====================>-------]  71%[1G[2K 6/7 [========================>---]  85%[1G[2K 7/7 [============================] 100%[1G[2K[32m3 package suggestions were added by new dependencies, use `composer suggest` to see details.[39m
+[32mGenerating optimized autoload files[39m
