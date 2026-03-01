@@ -5,8 +5,6 @@ services:
     plan: free
     healthCheckPath: /health
     envVars:
-      - key: PORT
-        value: "80"
       - key: APP_KEY
         value: "base64:0R44AdQR1E/mGz+SsCdUPXX62/pDHvWrCcGg/AjHChY="
       - key: APP_ENV
