@@ -1,6 +1,6 @@
 FROM richarvey/nginx-php-fpm:3.1.6
 
-# Install Node.js for frontend asset compilation (npm run build)
+# Install Node.js for frontend asset compilation
 RUN apk add --no-cache nodejs npm
 
 # Allow composer to run as root
@@ -9,11 +9,22 @@ ENV COMPOSER_ALLOW_SUPERUSER 1
 # Copy application code
 COPY . .
 
-# Install PHP dependencies at BUILD time (not runtime)
-RUN composer install --no-dev --working-dir=/var/www/html --optimize-autoloader
+# Create a minimal .env so artisan commands don't crash during build
+RUN cp .env.example .env && \
+    php artisan key:generate --no-interaction
+
+# Install PHP dependencies at BUILD time
+# --no-scripts: skip post-install artisan commands that need DB
+# Then run dump-autoload separately to generate classmap
+RUN composer install --no-dev --optimize-autoloader --no-scripts --working-dir=/var/www/html && \
+    composer dump-autoload --optimize --no-scripts --working-dir=/var/www/html
 
 # Install and build frontend assets at BUILD time
-RUN npm ci --prefix /var/www/html && npm run build --prefix /var/www/html
+# Use npm install (not npm ci) for better Alpine musl compatibility
+RUN npm install --prefix /var/www/html && npm run build --prefix /var/www/html
+
+# Remove build-only .env (runtime env vars come from Render dashboard)
+RUN rm -f .env
 
 # Image config
 ENV SKIP_COMPOSER 1
