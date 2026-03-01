@@ -24,18 +24,30 @@ echo "✅ Caches built — nginx will start now"
 (
     echo "🗄️  [background] Running fresh database migrations..."
     
+    # Neon's pooler (PgBouncer transaction mode) doesn't support DDL well.
+    # Switch to direct (non-pooler) endpoint for migrations only.
+    MIGRATE_ENV=""
+    if echo "$DB_HOST" | grep -q "\-pooler"; then
+        DIRECT_HOST=$(echo "$DB_HOST" | sed 's/-pooler//')
+        echo "🔄 [background] Using direct Neon endpoint for migrations: $DIRECT_HOST"
+        MIGRATE_ENV="DB_HOST=$DIRECT_HOST"
+    fi
+    
+    # Clear cached config so artisan reads env vars directly
+    php artisan config:clear 2>&1
+    
     # Retry up to 3 times (Neon cold start can cause first connection to timeout)
     MAX_RETRIES=3
     RETRY_COUNT=0
     
     while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
-        if php artisan migrate:fresh --force --seed 2>&1; then
+        if env $MIGRATE_ENV php artisan migrate:fresh --force --seed 2>&1; then
             echo "✅ [background] migrate:fresh + seed completed successfully"
             break
         else
             RETRY_COUNT=$((RETRY_COUNT + 1))
-            echo "⚠️  [background] Attempt $RETRY_COUNT/$MAX_RETRIES failed, retrying in 5s..."
-            sleep 5
+            echo "⚠️  [background] Attempt $RETRY_COUNT/$MAX_RETRIES failed, retrying in 10s..."
+            sleep 10
         fi
     done
     
@@ -43,6 +55,9 @@ echo "✅ Caches built — nginx will start now"
         echo "❌ [background] migrate:fresh failed after $MAX_RETRIES attempts"
         exit 1
     fi
+    
+    # Re-cache config with original pooler host for runtime queries
+    php artisan config:cache 2>&1
     
     echo "✅ [background] Runtime setup fully complete!"
 ) &

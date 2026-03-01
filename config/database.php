@@ -97,6 +97,11 @@ return [
             'prefix_indexes' => true,
             'search_path' => 'public',
             'sslmode' => env('DB_SSLMODE', 'prefer'),
+            'options' => [
+                // Emulate prepared statements for Neon/PgBouncer pooler compatibility
+                // PgBouncer transaction mode doesn't support native prepared statements
+                PDO::ATTR_EMULATE_PREPARES => true,
+            ],
         ],
 
         'sqlsrv' => [
