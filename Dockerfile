@@ -1,7 +1,14 @@
 # ============================================================
 # Stage 1: Install PHP dependencies
+# Uses php:8.2-cli to match runtime PHP version (8.2.7)
 # ============================================================
-FROM composer:2 AS vendor
+FROM php:8.2-cli-alpine AS vendor
+
+# Install system deps for composer (zip for package extraction)
+RUN apk add --no-cache unzip
+
+# Install composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /app
 COPY composer.json composer.lock ./
