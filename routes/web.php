@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Customer;
+use App\Models\Invoice;
+use App\Models\Quotation;
 
 // Note: /health endpoint is defined in bootstrap/app.php (outside web middleware)
 // This ensures health checks work without sessions, cookies, or encryption
@@ -12,7 +15,20 @@ Route::view('/', 'welcome')->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
-        return view('components.⚡dashboard');
+        $totalInvoices = Invoice::count();
+        $totalRevenue = Invoice::sum('total') ?? 0;
+        $totalQuotations = Quotation::count();
+        $acceptedQuotations = Quotation::where('status', 'accepted')->count();
+        $conversionRate = $totalQuotations > 0
+            ? round(($acceptedQuotations / $totalQuotations) * 100, 1)
+            : 0;
+        $recentInvoices = Invoice::with('customer')->latest()->take(5)->get();
+        $recentCustomers = Customer::withCount('invoices', 'quotations')->latest()->take(5)->get();
+
+        return view('components.⚡dashboard', compact(
+            'totalInvoices', 'totalRevenue', 'totalQuotations',
+            'conversionRate', 'recentInvoices', 'recentCustomers'
+        ));
     })->name('dashboard');
     
     // Customer routes
