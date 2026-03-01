@@ -11,9 +11,7 @@ php artisan config:cache
 echo "🛣️  Caching routes..."
 php artisan route:cache
 
-echo "👁️  Caching views..."
-php artisan view:cache
-
+# Skip view:cache — it can hang on large view sets and views compile on first request
 echo "✅ Caches built — nginx will start now"
 
 # Run migrate:fresh + seed in BACKGROUND so nginx can start immediately
