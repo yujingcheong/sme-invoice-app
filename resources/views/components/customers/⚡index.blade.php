@@ -1,39 +1,3 @@
-<?php
-
-use Livewire\Component;
-use Livewire\Attributes\Url;
-use App\Models\Customer;
-
-new class extends Component
-{
-    #[Url]
-    public string $search = '';
-    
-    public function with(): array
-    {
-        $customers = Customer::query()
-            ->when($this->search, function($query) {
-                $query->where(function($q) {
-                    $q->where('name', 'like', '%' . $this->search . '%')
-                      ->orWhere('email', 'like', '%' . $this->search . '%')
-                      ->orWhere('company_name', 'like', '%' . $this->search . '%');
-                });
-            })
-            ->withCount('invoices', 'quotations')
-            ->latest()
-            ->get();
-        
-        return ['customers' => $customers];
-    }
-    
-    public function delete($customerId): void
-    {
-        $customer = Customer::findOrFail($customerId);
-        $customer->delete();
-    }
-};
-?>
-
 <x-layouts::app :title="__('Customers')">
     <div class="flex h-full w-full flex-1 flex-col gap-6">
         <!-- Header -->
@@ -48,36 +12,23 @@ new class extends Component
             </a>
         </div>
 
-        <!-- Search -->
-        <div class="relative">
-            <input 
-                type="text" 
-                wire:model.live.debounce.300ms="search"
-                placeholder="Search customers by name, email, or company..."
-                class="w-full px-4 py-2 pl-10 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
-            <svg class="absolute left-3 top-2.5 w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-        </div>
+        @if (session('success'))
+            <div class="p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
+                {{ session('success') }}
+            </div>
+        @endif
 
         <!-- Customers List -->
         <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 overflow-hidden">
             @if($customers->isEmpty())
                 <div class="text-center py-12 px-4">
-                    @if($search)
-                        <div class="text-neutral-500 dark:text-neutral-400">
-                            No customers found matching "{{ $search }}"
-                        </div>
-                    @else
-                        <div class="text-neutral-500 dark:text-neutral-400 mb-4">
-                            No customers yet. Add your first customer to get started.
-                        </div>
-                        <a href="{{ route('customers.create') }}" 
-                           class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition">
-                            Add Your First Customer
-                        </a>
-                    @endif
+                    <div class="text-neutral-500 dark:text-neutral-400 mb-4">
+                        No customers yet. Add your first customer to get started.
+                    </div>
+                    <a href="{{ route('customers.create') }}" 
+                       class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition">
+                        Add Your First Customer
+                    </a>
                 </div>
             @else
                 <div class="overflow-x-auto">
@@ -116,12 +67,13 @@ new class extends Component
                                         <a href="{{ route('customers.edit', $customer) }}" class="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300">
                                             Edit
                                         </a>
-                                        <button 
-                                            wire:click="delete({{ $customer->id }})"
-                                            wire:confirm="Are you sure you want to delete this customer?"
-                                            class="text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300">
-                                            Delete
-                                        </button>
+                                        <form action="{{ route('customers.destroy', $customer) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this customer?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300">
+                                                Delete
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

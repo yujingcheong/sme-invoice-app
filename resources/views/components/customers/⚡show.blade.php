@@ -1,19 +1,3 @@
-<?php
-
-use Livewire\Component;
-use App\Models\Customer;
-
-new class extends Component
-{
-    public Customer $customer;
-    
-    public function mount(Customer $customer): void
-    {
-        $this->customer = $customer->load(['invoices', 'quotations']);
-    }
-};
-?>
-
 <x-layouts::app :title="__('Customer Details')">
     <div class="flex h-full w-full flex-1 flex-col gap-6">
         <!-- Header -->

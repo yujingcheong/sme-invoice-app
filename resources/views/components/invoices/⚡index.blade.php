@@ -1,21 +1,8 @@
-<?php
-
-use Livewire\Component;
-use App\Models\Invoice;
-
-new class extends Component
-{
-    public function getInvoices()
-    {
-        return Invoice::with('customer')->latest()->get();
-    }
-};
-?>
-
+<x-layouts::app :title="__('Invoices')">
 <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="p-6 text-gray-900">
+        <div class="bg-white dark:bg-neutral-800 overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="p-6 text-gray-900 dark:text-neutral-100">
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-2xl font-bold">Invoices</h2>
                     <a 
@@ -34,7 +21,7 @@ new class extends Component
 
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm text-left border-collapse">
-                        <thead class="text-xs uppercase bg-gray-100 border-b">
+                        <thead class="text-xs uppercase bg-gray-100 dark:bg-neutral-700 border-b">
                             <tr>
                                 <th class="px-6 py-3">Invoice #</th>
                                 <th class="px-6 py-3">Customer</th>
@@ -46,7 +33,7 @@ new class extends Component
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($this->getInvoices() as $invoice)
+                            @forelse ($invoices as $invoice)
                                 <tr class="border-b hover:bg-gray-50">
                                     <td class="px-6 py-4 font-semibold">{{ $invoice->invoice_number }}</td>
                                     <td class="px-6 py-4">{{ $invoice->customer->name }}</td>
@@ -80,3 +67,4 @@ new class extends Component
         </div>
     </div>
 </div>
+</x-layouts::app>
