@@ -4,8 +4,10 @@
 # ============================================================
 FROM php:8.2-cli-alpine AS vendor
 
-# Install system deps for composer (zip for package extraction)
-RUN apk add --no-cache unzip
+# Install system deps for composer (zip for package extraction) and intl extension
+RUN apk add --no-cache unzip icu-dev \
+    && docker-php-ext-configure intl \
+    && docker-php-ext-install intl
 
 # Install composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
@@ -38,6 +40,11 @@ RUN npm run build
 # Stage 3: Final production image
 # ============================================================
 FROM richarvey/nginx-php-fpm:3.1.6
+
+# Install intl extension in final image
+RUN apk add --no-cache icu-dev \
+    && docker-php-ext-configure intl \
+    && docker-php-ext-install intl
 
 # Copy application code
 COPY . .
