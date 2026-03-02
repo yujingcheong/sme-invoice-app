@@ -18,7 +18,7 @@
                     <flux:sidebar.item icon="user-group" :href="route('customers.index')" :current="request()->routeIs('customers.*')" wire:navigate>
                         {{ __('Customers') }}
                     </flux:sidebar.item>
-                    <flux:sidebar.item icon="file-text" :href="route('invoices.index')" :current="request()->routeIs('invoices.*')" wire:navigate>
+                    <flux:sidebar.item icon="document-text" :href="route('invoices.index')" :current="request()->routeIs('invoices.*')" wire:navigate>
                         {{ __('Invoices') }}
                     </flux:sidebar.item>
                     <flux:sidebar.item icon="archive" :href="route('quotations.index')" :current="request()->routeIs('quotations.*')" wire:navigate>
