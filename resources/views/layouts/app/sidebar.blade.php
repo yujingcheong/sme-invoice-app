@@ -6,33 +6,25 @@
     <body class="min-h-screen bg-white dark:bg-zinc-800">
         <flux:sidebar sticky collapsible="mobile" class="border-e border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
             <flux:sidebar.header>
-    <x-app-logo :sidebar="true" href="{{ route('dashboard') }}" wire:navigate />
-    <flux:sidebar.collapse class="lg:hidden" />
-
-    <nav class="my-4">
-        <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">Dashboard</x-nav-link>
-        <x-nav-link href="{{ route('customers.index') }}" :active="request()->routeIs('customers.*')">Customers</x-nav-link>
-        <x-nav-link href="{{ route('invoices.index') }}" :active="request()->routeIs('invoices.*')">Invoices</x-nav-link>
-        <x-nav-link href="{{ route('quotations.index') }}" :active="request()->routeIs('quotations.*')">Quotations</x-nav-link>
-    </nav>
-
-</flux:sidebar.header>
+                <x-app-logo :sidebar="true" href="{{ route('dashboard') }}" wire:navigate />
+                <flux:sidebar.collapse class="lg:hidden" />
+            </flux:sidebar.header>
 
             <flux:sidebar.nav>
                 <flux:sidebar.group :heading="__('Platform')" class="grid">
-    <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
-        {{ __('Dashboard') }}
-    </flux:sidebar.item>
-    <flux:sidebar.item icon="user-group" :href="route('customers.index')" :current="request()->routeIs('customers.*')" wire:navigate>
-        {{ __('Customers') }}
-    </flux:sidebar.item>
-    <flux:sidebar.item icon="file-text" :href="route('invoices.index')" :current="request()->routeIs('invoices.*')" wire:navigate>
-        {{ __('Invoices') }}
-    </flux:sidebar.item>
-    <flux:sidebar.item icon="archive" :href="route('quotations.index')" :current="request()->routeIs('quotations.*')" wire:navigate>
-        {{ __('Quotations') }}
-    </flux:sidebar.item>
-</flux:sidebar.group>
+                    <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
+                        {{ __('Dashboard') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="user-group" :href="route('customers.index')" :current="request()->routeIs('customers.*')" wire:navigate>
+                        {{ __('Customers') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="file-text" :href="route('invoices.index')" :current="request()->routeIs('invoices.*')" wire:navigate>
+                        {{ __('Invoices') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="archive" :href="route('quotations.index')" :current="request()->routeIs('quotations.*')" wire:navigate>
+                        {{ __('Quotations') }}
+                    </flux:sidebar.item>
+                </flux:sidebar.group>
             </flux:sidebar.nav>
 
             <flux:spacer />
