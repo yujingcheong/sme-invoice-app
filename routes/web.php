@@ -138,7 +138,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // ── Quotation Routes ─────────────────────────────────────────────
     Route::get('quotations', function () {
         $quotations = Quotation::with('customer')->latest()->get();
-        return view('components.quotations.index', ['quotations' => $quotations]);
+        return view('components.quotations.⚡index', ['quotations' => $quotations]);
     })->name('quotations.index');
 
     Route::get('quotations/create', function () {
