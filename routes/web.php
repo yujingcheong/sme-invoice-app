@@ -140,6 +140,106 @@ Route::middleware(['auth', 'verified'])->group(function () {
         $quotations = Quotation::with('customer')->latest()->get();
         return view('components.quotations.index', ['quotations' => $quotations]);
     })->name('quotations.index');
+
+    Route::get('quotations/create', function () {
+        $customers = Customer::orderBy('name')->get();
+        return view('components.quotations.⚡form', ['customers' => $customers, 'quotation' => null]);
+    })->name('quotations.create');
+
+    Route::post('quotations', function (Request $request) {
+        $request->validate([
+            'customer_id' => 'required|exists:customers,id',
+            'status' => 'required|in:draft,sent,accepted,rejected',
+            'items' => 'required|array|min:1',
+            'items.*.description' => 'required|string|max:255',
+            'items.*.quantity' => 'required|numeric|min:0.01',
+            'items.*.unit_price' => 'required|numeric|min:0',
+        ]);
+
+        $subtotal = 0;
+        $lineItems = [];
+        foreach ($request->items as $item) {
+            $amount = round($item['quantity'] * $item['unit_price'], 2);
+            $subtotal += $amount;
+            $lineItems[] = [
+                'description' => $item['description'],
+                'quantity' => $item['quantity'],
+                'unit_price' => $item['unit_price'],
+                'amount' => $amount,
+            ];
+        }
+
+        $gstAmount = round($subtotal * 0.09, 2);
+        $total = $subtotal + $gstAmount;
+
+        $quotation = Quotation::create([
+            'customer_id' => $request->customer_id,
+            'quotation_number' => 'QTN-' . date('Ymd') . '-' . str_pad(Quotation::count() + 1, 3, '0', STR_PAD_LEFT),
+            'subtotal' => $subtotal,
+            'gst_amount' => $gstAmount,
+            'total' => $total,
+            'status' => $request->status,
+        ]);
+
+        foreach ($lineItems as $item) {
+            $quotation->items()->create($item);
+        }
+
+        return redirect()->route('quotations.index')->with('success', 'Quotation created successfully!');
+    })->name('quotations.store');
+
+    Route::get('quotations/{quotation}/edit', function (Quotation $quotation) {
+        $customers = Customer::orderBy('name')->get();
+        $quotation->load('items');
+        return view('components.quotations.⚡form', ['customers' => $customers, 'quotation' => $quotation]);
+    })->name('quotations.edit');
+
+    Route::put('quotations/{quotation}', function (Request $request, Quotation $quotation) {
+        $request->validate([
+            'customer_id' => 'required|exists:customers,id',
+            'status' => 'required|in:draft,sent,accepted,rejected',
+            'items' => 'required|array|min:1',
+            'items.*.description' => 'required|string|max:255',
+            'items.*.quantity' => 'required|numeric|min:0.01',
+            'items.*.unit_price' => 'required|numeric|min:0',
+        ]);
+
+        $subtotal = 0;
+        $lineItems = [];
+        foreach ($request->items as $item) {
+            $amount = round($item['quantity'] * $item['unit_price'], 2);
+            $subtotal += $amount;
+            $lineItems[] = [
+                'description' => $item['description'],
+                'quantity' => $item['quantity'],
+                'unit_price' => $item['unit_price'],
+                'amount' => $amount,
+            ];
+        }
+
+        $gstAmount = round($subtotal * 0.09, 2);
+        $total = $subtotal + $gstAmount;
+
+        $quotation->update([
+            'customer_id' => $request->customer_id,
+            'subtotal' => $subtotal,
+            'gst_amount' => $gstAmount,
+            'total' => $total,
+            'status' => $request->status,
+        ]);
+
+        $quotation->items()->delete();
+        foreach ($lineItems as $item) {
+            $quotation->items()->create($item);
+        }
+
+        return redirect()->route('quotations.index')->with('success', 'Quotation updated successfully!');
+    })->name('quotations.update');
+
+    Route::delete('quotations/{quotation}', function (Quotation $quotation) {
+        $quotation->delete();
+        return redirect()->route('quotations.index')->with('success', 'Quotation deleted successfully!');
+    })->name('quotations.destroy');
 });
 
 require __DIR__.'/settings.php';
