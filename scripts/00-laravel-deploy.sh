@@ -6,10 +6,18 @@
 echo "🚀 Starting Laravel runtime setup..."
 
 echo "⚙️  Caching configuration..."
+php artisan config:clear
 php artisan config:cache
 
 echo "🛣️  Caching routes..."
+php artisan route:clear
 php artisan route:cache
+
+# Clear any remaining bootstrap caches manually to be safe
+rm -f bootstrap/cache/config.php
+rm -f bootstrap/cache/routes.php
+rm -f bootstrap/cache/packages.php
+rm -f bootstrap/cache/services.php
 
 # Skip view:cache — it can hang on large view sets and views compile on first request
 echo "✅ Caches built — nginx will start now"
