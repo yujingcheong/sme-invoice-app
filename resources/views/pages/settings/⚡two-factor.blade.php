@@ -49,7 +49,7 @@ new #[Title('Two-Factor Authentication')] class extends Component {
 } ?>
 
 <section class="w-full">
-    @include('partials.settings-heading')
+    @include('partials.⚡settings-heading')
 
     <flux:heading class="sr-only">{{ __('Two-Factor Authentication Settings') }}</flux:heading>
 
