@@ -49,6 +49,9 @@ RUN apk add --no-cache icu-dev libpq-dev \
 # Copy application code
 COPY . .
 
+# Explicitly clear any local bootstrap caches that might have been copied
+RUN rm -f bootstrap/cache/*.php
+
 # Copy vendor from stage 1 (overwrites excluded /vendor from .dockerignore)
 COPY --from=vendor /app/vendor/ vendor/
 
