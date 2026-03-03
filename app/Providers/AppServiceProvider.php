@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Carbon\CarbonImmutable;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
@@ -27,6 +28,8 @@ class AppServiceProvider extends ServiceProvider
         if (app()->isProduction()) {
             URL::forceScheme('https');
         }
+
+        Blade::anonymousComponentPath(resource_path('views/layouts'), 'layouts');
         
         $this->configureDefaults();
     }
