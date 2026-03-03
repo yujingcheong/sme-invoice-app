@@ -53,7 +53,7 @@ new #[Title('Two-Factor Authentication')] class extends Component {
 
     <flux:heading class="sr-only">{{ __('Two-Factor Authentication Settings') }}</flux:heading>
 
-    <x-pages::settings.layout
+    <x-pages.settings.⚡layout
         :heading="__('Two Factor Authentication')"
         :subheading="__('Manage your two-factor authentication settings')"
     >
@@ -68,7 +68,7 @@ new #[Title('Two-Factor Authentication')] class extends Component {
                         {{ __('With two-factor authentication enabled, you will be prompted for a secure, random pin during login, which you can retrieve from the TOTP-supported application on your phone.') }}
                     </flux:text>
 
-                    <livewire:pages::settings.two-factor.recovery-codes :$requiresConfirmation />
+                    <livewire:pages.settings.two-factor.⚡recovery-codes :$requiresConfirmation />
 
                     <div class="flex justify-start">
                         <flux:button
@@ -102,9 +102,9 @@ new #[Title('Two-Factor Authentication')] class extends Component {
                         </flux:button>
                     </flux:modal.trigger>
 
-                    <livewire:pages::settings.two-factor-setup-modal :requires-confirmation="$requiresConfirmation" />
+                    <livewire:pages.settings.⚡two-factor-setup-modal :requires-confirmation="$requiresConfirmation" />
                 </div>
             @endif
         </div>
-    </x-pages::settings.layout>
+    </x-pages.settings.⚡layout>
 </section>

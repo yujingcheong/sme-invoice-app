@@ -1,0 +1,50 @@
+UI Naming Convention Update - Settings Directory
+================================================
+
+Task: Convert pages:: references to pages. (dot notation) with ⚡ prefix
+
+Files Processed:
+---------------
+✓ resources/views/pages/settings/⚡appearance.blade.php
+✓ resources/views/pages/settings/⚡delete-user-form.blade.php
+✓ resources/views/pages/settings/⚡password.blade.php
+✓ resources/views/pages/settings/⚡profile.blade.php
+✓ resources/views/pages/settings/⚡two-factor.blade.php
+
+Changes Summary:
+---------------
+
+1. ⚡appearance.blade.php:
+   - pages::settings.layout → pages.settings.⚡layout (2 occurrences)
+
+2. ⚡delete-user-form.blade.php:
+   - pages::settings.delete-user-modal → pages.settings.⚡delete-user-modal (1 occurrence)
+
+3. ⚡password.blade.php:
+   - pages::settings.layout → pages.settings.⚡layout (2 occurrences)
+
+4. ⚡profile.blade.php:
+   - pages::settings.layout → pages.settings.⚡layout (2 occurrences)
+   - pages::settings.delete-user-form → pages.settings.⚡delete-user-form (1 occurrence)
+
+5. ⚡two-factor.blade.php:
+   - pages::settings.layout → pages.settings.⚡layout (2 occurrences)
+   - pages::settings.two-factor.recovery-codes → pages.settings.two-factor.⚡recovery-codes (1 occurrence)
+   - pages::settings.two-factor-setup-modal → pages.settings.⚡two-factor-setup-modal (1 occurrence)
+
+Total References Updated: 12
+
+Verification:
+------------
+✓ No 'pages::' references remain in resources/views/pages/settings/
+✓ All component references use dot notation (pages.settings.⚡...)
+✓ All ⚡ prefixes correctly added to component names
+
+Success Criteria Met:
+--------------------
+✓ All files converted from :: to . notation
+✓ All component names include ⚡ prefix where applicable
+✓ 12 total references updated across 5 files
+✓ Zero 'pages::' occurrences remaining
+
+Status: COMPLETE ✓
