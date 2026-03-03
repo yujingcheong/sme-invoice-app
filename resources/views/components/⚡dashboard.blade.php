@@ -1,4 +1,4 @@
-<x-layouts.app :title="__('Dashboard')">
+<x-layouts::app :title="__('Dashboard')">
     <div class="flex h-full w-full flex-1 flex-col gap-6">
         <!-- Stats Grid -->
         <div class="grid gap-4 md:grid-cols-4">
@@ -90,4 +90,4 @@
             </div>
         </div>
     </div>
-</x-layouts.app>
+</x-layouts::app>

@@ -53,7 +53,7 @@ new #[Title('Two-Factor Authentication')] class extends Component {
 
     <flux:heading class="sr-only">{{ __('Two-Factor Authentication Settings') }}</flux:heading>
 
-    <x-pages.settings.⚡layout
+    <x-pages::settings.⚡layout
         :heading="__('Two Factor Authentication')"
         :subheading="__('Manage your two-factor authentication settings')"
     >
@@ -106,5 +106,5 @@ new #[Title('Two-Factor Authentication')] class extends Component {
                 </div>
             @endif
         </div>
-    </x-pages.settings.⚡layout>
+    </x-pages::settings.⚡layout>
 </section>
