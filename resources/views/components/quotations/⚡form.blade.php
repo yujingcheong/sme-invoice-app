@@ -1,4 +1,4 @@
-<x-layouts::app :title="$quotation ? __('Edit Quotation') : __('Create Quotation')">
+<x-layouts::⚡app :title="$quotation ? __('Edit Quotation') : __('Create Quotation')">
 <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white dark:bg-neutral-800 overflow-hidden shadow-sm sm:rounded-lg">
@@ -233,4 +233,4 @@
     });
     @endif
 </script>
-</x-layouts::app>
+</x-layouts::⚡app>
