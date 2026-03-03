@@ -6,6 +6,8 @@
 echo "🚀 Starting Laravel runtime setup..."
 
 echo "⚙️  Caching configuration..."
+# Force removal of potentially stale/poisoned bootstrap caches
+rm -rf bootstrap/cache/*.php
 php artisan config:clear
 php artisan config:cache
 
