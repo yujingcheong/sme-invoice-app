@@ -10,9 +10,9 @@ use App\Models\Quotation;
 // This ensures health checks work without sessions, cookies, or encryption
 
 // Portfolio page (public - no auth required)
-Route::view('/portfolio', 'portfolio')->name('portfolio');
+Route::view('/portfolio', '⚡portfolio')->name('portfolio');
 
-Route::view('/', 'welcome')->name('home');
+Route::view('/', '⚡welcome')->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     // Dashboard

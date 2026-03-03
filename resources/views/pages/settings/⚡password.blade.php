@@ -75,9 +75,9 @@ new #[Title('Password settings')] class extends Component {
                     </flux:button>
                 </div>
 
-                <x-action-message class="me-3" on="password-updated">
+                <x-⚡action-message class="me-3" on="password-updated">
                     {{ __('Saved.') }}
-                </x-action-message>
+                </x-⚡action-message>
             </div>
         </form>
     </x-pages::settings.layout>
