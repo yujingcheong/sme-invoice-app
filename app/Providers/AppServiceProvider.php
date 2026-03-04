@@ -31,6 +31,12 @@ class AppServiceProvider extends ServiceProvider
 
         Blade::anonymousComponentPath(resource_path('views/layouts'), '⚡-layouts');
         Blade::anonymousComponentPath(resource_path('views/layouts/app'), '⚡-layouts.app');
+        // Blade normalizes non-alphanumeric characters in component namespaces
+        // (e.g. the ⚡ character) to hyphens when compiling tags. Register
+        // the normalized variant so compiled tags like `-layouts::...`
+        // resolve to the same anonymous components.
+        Blade::anonymousComponentPath(resource_path('views/layouts'), '-layouts');
+        Blade::anonymousComponentPath(resource_path('views/layouts/app'), '-layouts.app');
         Blade::anonymousComponentPath(resource_path('views/pages'), '⚡-pages');
         Blade::anonymousComponentPath(resource_path('views/components'), '⚡-comp');
         // Also register a simple `comp` namespace for Blade components so
