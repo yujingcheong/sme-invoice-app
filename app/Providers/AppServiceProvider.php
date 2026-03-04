@@ -31,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
 
         Blade::anonymousComponentPath(resource_path('views/layouts'), 'layouts');
         Blade::anonymousComponentPath(resource_path('views/pages'), 'pages');
+        Blade::anonymousComponentPath(resource_path('views/components'), 'comp');
         
         $this->configureDefaults();
     }

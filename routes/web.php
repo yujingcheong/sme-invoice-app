@@ -10,9 +10,9 @@ use App\Models\Quotation;
 // This ensures health checks work without sessions, cookies, or encryption
 
 // Portfolio page (public - no auth required)
-Route::view('/portfolio', '⚡portfolio')->name('portfolio');
+Route::view('/portfolio', 'portfolio')->name('portfolio');
 
-Route::view('/', '⚡welcome')->name('home');
+Route::view('/', 'welcome')->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     // Dashboard
@@ -27,7 +27,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         $recentInvoices = Invoice::with('customer')->latest()->take(5)->get();
         $recentCustomers = Customer::withCount('invoices', 'quotations')->latest()->take(5)->get();
 
-        return view('components.⚡dashboard', compact(
+        return view('components.dashboard', compact(
             'totalInvoices', 'totalRevenue', 'totalQuotations',
             'conversionRate', 'recentInvoices', 'recentCustomers'
         ));
@@ -36,12 +36,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // ── Customer Routes ──────────────────────────────────────────────
     Route::get('customers', function () {
         $customers = Customer::withCount('invoices', 'quotations')->latest()->get();
-        return view('components.customers.⚡index', ['customers' => $customers]);
+        return view('components.customers.index', ['customers' => $customers]);
     })->name('customers.index');
     
     Route::get('customers/create', function () {
         $customer = null;
-        return view('components.customers.⚡form', ['customer' => $customer]);
+        return view('components.customers.form', ['customer' => $customer]);
     })->name('customers.create');
     
     Route::post('customers', function (Request $request) {
@@ -58,11 +58,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     
     Route::get('customers/{customer}', function (Customer $customer) {
         $customer->load(['invoices', 'quotations']);
-        return view('components.customers.⚡show', ['customer' => $customer]);
+        return view('components.customers.show', ['customer' => $customer]);
     })->name('customers.show');
     
     Route::get('customers/{customer}/edit', function (Customer $customer) {
-        return view('components.customers.⚡form', ['customer' => $customer]);
+        return view('components.customers.form', ['customer' => $customer]);
     })->name('customers.edit');
     
     Route::put('customers/{customer}', function (Request $request, Customer $customer) {
@@ -85,12 +85,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // ── Invoice Routes ───────────────────────────────────────────────
     Route::get('invoices', function () {
         $invoices = Invoice::with('customer')->latest()->get();
-        return view('components.invoices.⚡index', ['invoices' => $invoices]);
+        return view('components.invoices.index', ['invoices' => $invoices]);
     })->name('invoices.index');
     
     Route::get('invoices/create', function () {
         $customers = Customer::orderBy('name')->get();
-        return view('components.invoices.⚡create', ['customers' => $customers]);
+        return view('components.invoices.create', ['customers' => $customers]);
     })->name('invoices.create');
     
     Route::post('invoices', function (Request $request) {
@@ -138,12 +138,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // ── Quotation Routes ─────────────────────────────────────────────
     Route::get('quotations', function () {
         $quotations = Quotation::with('customer')->latest()->get();
-        return view('components.quotations.⚡index', ['quotations' => $quotations]);
+        return view('components.quotations.index', ['quotations' => $quotations]);
     })->name('quotations.index');
 
     Route::get('quotations/create', function () {
         $customers = Customer::orderBy('name')->get();
-        return view('components.quotations.⚡form', ['customers' => $customers, 'quotation' => null]);
+        return view('components.quotations.form', ['customers' => $customers, 'quotation' => null]);
     })->name('quotations.create');
 
     Route::post('quotations', function (Request $request) {
@@ -191,7 +191,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('quotations/{quotation}/edit', function (Quotation $quotation) {
         $customers = Customer::orderBy('name')->get();
         $quotation->load('items');
-        return view('components.quotations.⚡form', ['customers' => $customers, 'quotation' => $quotation]);
+        return view('components.quotations.form', ['customers' => $customers, 'quotation' => $quotation]);
     })->name('quotations.edit');
 
     Route::put('quotations/{quotation}', function (Request $request, Quotation $quotation) {

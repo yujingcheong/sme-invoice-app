@@ -1,9 +1,9 @@
-<x-layouts::⚡auth :title="__('Register')">
+<x-layouts::auth :title="__('Register')">
     <div class="flex flex-col gap-6">
-        <x-⚡auth-header :title="__('Create an account')" :description="__('Enter your details below to create your account')" />
+        <x-comp::auth-header :title="__('Create an account')" :description="__('Enter your details below to create your account')" />
 
         <!-- Session Status -->
-        <x-⚡auth-session-status class="text-center" :status="session('status')" />
+        <x-comp::auth-session-status class="text-center" :status="session('status')" />
 
         <form method="POST" action="{{ route('register.store') }}" class="flex flex-col gap-6">
             @csrf
@@ -64,4 +64,4 @@
             <flux:link :href="route('login')" wire:navigate>{{ __('Log in') }}</flux:link>
         </div>
     </div>
-</x-layouts::⚡auth>
+</x-layouts::auth>

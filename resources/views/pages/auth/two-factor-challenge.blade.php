@@ -1,4 +1,4 @@
-<x-layouts::⚡auth :title="__('Two-Factor Authentication')">
+<x-layouts::auth :title="__('Two-Factor Authentication')">
     <div class="flex flex-col gap-6">
         <div
             class="relative w-full h-auto"
@@ -24,14 +24,14 @@
             }"
         >
             <div x-show="!showRecoveryInput">
-                <x-⚡auth-header
+                <x-comp::auth-header
                     :title="__('Authentication Code')"
                     :description="__('Enter the authentication code provided by your authenticator application.')"
                 />
             </div>
 
             <div x-show="showRecoveryInput">
-                <x-⚡auth-header
+                <x-comp::auth-header
                     :title="__('Recovery Code')"
                     :description="__('Please confirm access to your account by entering one of your emergency recovery codes.')"
                 />
@@ -92,4 +92,4 @@
             </form>
         </div>
     </div>
-</x-layouts::⚡auth>
+</x-layouts::auth>
