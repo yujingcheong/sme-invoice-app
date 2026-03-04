@@ -1,6 +1,6 @@
 <x-layouts::auth :title="__('Forgot password')">
     <div class="flex flex-col gap-6">
-        <x-comp::auth-header :title="__('Forgot password')" :description="__('Enter your email to receive a password reset link')" />
+        <x-⚡-comp::auth-header :title="__('Forgot password')" :description="__('Enter your email to receive a password reset link')" />
 
         <!-- Session Status -->
         <x-comp::auth-session-status class="text-center" :status="session('status')" />
@@ -28,4 +28,4 @@
             <flux:link :href="route('login')" wire:navigate>{{ __('log in') }}</flux:link>
         </div>
     </div>
-</x-layouts::auth>
+</x-⚡-layouts::auth>

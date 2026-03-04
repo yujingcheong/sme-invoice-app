@@ -195,4 +195,4 @@
         addLineItem();
     });
 </script>
-</x-layouts::app>
+</x-⚡-layouts::app>

@@ -1,6 +1,6 @@
 <x-layouts::auth :title="__('Confirm password')">
     <div class="flex flex-col gap-6">
-        <x-comp::auth-header
+        <x-⚡-comp::auth-header
             :title="__('Confirm password')"
             :description="__('This is a secure area of the application. Please confirm your password before continuing.')"
         />
@@ -25,4 +25,4 @@
             </flux:button>
         </form>
     </div>
-</x-layouts::auth>
+</x-⚡-layouts::auth>

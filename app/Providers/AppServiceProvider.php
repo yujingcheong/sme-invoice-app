@@ -29,10 +29,10 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
 
-        Blade::anonymousComponentPath(resource_path('views/layouts'), 'layouts');
-        Blade::anonymousComponentPath(resource_path('views/layouts/app'), 'layouts.app');
-        Blade::anonymousComponentPath(resource_path('views/pages'), 'pages');
-        Blade::anonymousComponentPath(resource_path('views/components'), 'comp');
+        Blade::anonymousComponentPath(resource_path('views/layouts'), '⚡-layouts');
+        Blade::anonymousComponentPath(resource_path('views/layouts/app'), '⚡-layouts.app');
+        Blade::anonymousComponentPath(resource_path('views/pages'), '⚡-pages');
+        Blade::anonymousComponentPath(resource_path('views/components'), '⚡-comp');
         
         $this->configureDefaults();
     }

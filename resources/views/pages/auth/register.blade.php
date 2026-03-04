@@ -1,6 +1,6 @@
 <x-layouts::auth :title="__('Register')">
     <div class="flex flex-col gap-6">
-        <x-comp::auth-header :title="__('Create an account')" :description="__('Enter your details below to create your account')" />
+        <x-⚡-comp::auth-header :title="__('Create an account')" :description="__('Enter your details below to create your account')" />
 
         <!-- Session Status -->
         <x-comp::auth-session-status class="text-center" :status="session('status')" />
@@ -64,4 +64,4 @@
             <flux:link :href="route('login')" wire:navigate>{{ __('Log in') }}</flux:link>
         </div>
     </div>
-</x-layouts::auth>
+</x-⚡-layouts::auth>

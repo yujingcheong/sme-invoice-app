@@ -1,6 +1,6 @@
 <x-layouts::auth :title="__('Reset password')">
     <div class="flex flex-col gap-6">
-        <x-comp::auth-header :title="__('Reset password')" :description="__('Please enter your new password below')" />
+        <x-⚡-comp::auth-header :title="__('Reset password')" :description="__('Please enter your new password below')" />
 
         <!-- Session Status -->
         <x-comp::auth-session-status class="text-center" :status="session('status')" />
@@ -49,4 +49,4 @@
             </div>
         </form>
     </div>
-</x-layouts::auth>
+</x-⚡-layouts::auth>
