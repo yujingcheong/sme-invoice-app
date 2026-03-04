@@ -33,6 +33,9 @@ class AppServiceProvider extends ServiceProvider
         Blade::anonymousComponentPath(resource_path('views/layouts/app'), '⚡-layouts.app');
         Blade::anonymousComponentPath(resource_path('views/pages'), '⚡-pages');
         Blade::anonymousComponentPath(resource_path('views/components'), '⚡-comp');
+        // Also register a simple `comp` namespace for Blade components so
+        // views can reference components with `<x-comp::...>`.
+        Blade::anonymousComponentPath(resource_path('views/components'), 'comp');
         
         $this->configureDefaults();
     }
