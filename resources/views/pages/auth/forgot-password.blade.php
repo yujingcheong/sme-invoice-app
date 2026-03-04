@@ -1,4 +1,4 @@
-<x-layouts::auth :title="__('Forgot password')">
+<x-⚡-layouts::auth :title="__('Forgot password')">
     <div class="flex flex-col gap-6">
         <x-⚡-comp::auth-header :title="__('Forgot password')" :description="__('Enter your email to receive a password reset link')" />
 

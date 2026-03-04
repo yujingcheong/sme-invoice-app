@@ -1,4 +1,4 @@
-<x-layouts::auth :title="__('Confirm password')">
+<x-⚡-layouts::auth :title="__('Confirm password')">
     <div class="flex flex-col gap-6">
         <x-⚡-comp::auth-header
             :title="__('Confirm password')"

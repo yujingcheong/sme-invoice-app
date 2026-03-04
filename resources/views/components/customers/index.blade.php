@@ -1,4 +1,4 @@
-<x-layouts::app :title="__('Customers')">
+<x-⚡-layouts::app :title="__('Customers')">
     <div class="flex h-full w-full flex-1 flex-col gap-6">
         <!-- Header -->
         <div class="flex items-center justify-between">
